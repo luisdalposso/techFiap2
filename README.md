@@ -48,10 +48,19 @@ O pipeline de dados descrito na imagem segue os seguintes passos:
    ```bash
    pip install requests pandas pyarrow boto3 unidecode
 
-## Imagens configurações AWS
-![Arquitetura Pipeline Dados AWS Cloud – B3](images/pipeline.png)
-![Bucket S3 criado e suas pastas](images/s3.jpeg)
-![Glue ETL criado](images/glue.jpeg)
-![Lambda criada](images/lambda.jpeg)
-![Data Catalog Glue](images/glue-data-catalog.jpeg)
-![Consumo dos dados tratados na Athena](images/glue-data-catalog.jpeg)
+## Evidências AWS
+
+![Bucket S3 criado e suas pastas](images/s3.jpeg)  
+*Figura 1: Bucket S3 criado e suas pastas.*
+
+![Glue ETL criado](images/glue.jpeg)  
+*Figura 2: Glue ETL criado.*
+
+![Lambda criada](images/lambda.jpeg)  
+*Figura 3: Lambda criada.*
+
+![Data Catalog Glue](images/glue-data-catalog.jpeg)  
+*Figura 4: Data Catalog no Glue.*
+
+![Consumo dos dados tratados na Athena](images/athena.jpeg)  
+*Figura 5: Consumo dos dados tratados na Athena.*
