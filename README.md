@@ -1,6 +1,8 @@
 # Script de Conversão de CSV para Parquet e Upload para S3
 
-Este script Python automatiza o processo de download de um arquivo CSV, sua conversão para o formato Parquet, e o upload do arquivo resultante para um bucket no Amazon S3. Ele faz parte de um pipeline de dados na AWS, conforme ilustrado na imagem abaixo:
+Este script faz parte da entrega do segundo desafio do MBA Fiap. 
+O desafio consiste em fazer o download de um arquivo csv, converte-lo em parquet e envia-lo para um bucket s3 onde será tratado. 
+Seguiremos o pipeline abaixo:
 
 ![Arquitetura Pipeline Dados AWS Cloud – B3](images/pipeline.png)
 
@@ -10,19 +12,18 @@ O pipeline de dados descrito na imagem segue os seguintes passos:
 
 1. **Dados IBOV (Site B3)**:
    - Os dados são obtidos do site da B3, que fornece informações sobre o Índice Bovespa (IBOV).
-   - Um **script Python** é executado sob demanda para baixar o arquivo CSV contendo os dados.
+   - **script Python** é executado sob demanda para baixar o arquivo CSV contendo os dados, em seguida é convertido para .parquet e feito o upload para o S3
 
 2. **AWS S3 (Bucket RAW)**:
-   - O arquivo CSV é convertido para o formato Parquet e enviado para um bucket S3 chamado `raw`.
+   - O convertido é enviado para uma pasta no bucket S3 chamada `raw`.
    - Este bucket armazena os dados brutos antes de qualquer processamento.
 
 3. **AWS Lambda (Trigger Glue)**:
-   - Um gatilho (trigger) é acionado no AWS Lambda sempre que um novo arquivo é adicionado ao bucket `raw`.
+   - Um trigger é acionado no AWS Lambda sempre que um novo arquivo é adicionado a pasta `raw` e seja do formato `parquet`
    - O Lambda inicia um job no AWS Glue para processar os dados.
 
 4. **AWS Glue (ETL)**:
-   - O AWS Glue realiza a transformação dos dados (ETL - Extract, Transform, Load).
-   - Os dados são limpos, transformados e preparados para análise.
+   - O AWS Glue realiza o ETL dos dados.
 
 5. **AWS S3 (Bucket REFINED)**:
    - Após o processamento, os dados refinados são armazenados em outro bucket S3 chamado `refined`.
@@ -46,3 +47,11 @@ O pipeline de dados descrito na imagem segue os seguintes passos:
 1. **Instalação das Dependências**: Certifique-se de ter todas as bibliotecas necessárias instaladas. Você pode instalá-las usando pip:
    ```bash
    pip install requests pandas pyarrow boto3 unidecode
+
+## Imagens configurações AWS
+![Arquitetura Pipeline Dados AWS Cloud – B3](images/pipeline.png)
+![Bucket S3 criado e suas pastas](images/s3.jpeg)
+![Glue ETL criado](images/glue.jpeg)
+![Lambda criada](images/lambda.jpeg)
+![Data Catalog Glue](images/glue-data-catalog.jpeg)
+![Consumo dos dados tratados na Athena](images/glue-data-catalog.jpeg)
